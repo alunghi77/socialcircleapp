@@ -37,33 +37,33 @@ class Controller_Api extends Controller_Rest
 
     protected $_uid;
 
-    // public function router($method, array $params)
-    // {
+    public function router($method,$params)
+    {
 
-    //     $user       = \Auth::instance()->get_user_id();
-    //     $this->uid  = $user[1];
+        $user       = \Auth::instance()->get_user_id();
+        $this->_uid  = $user[1];
 
-    //     #if image upload then get csrf token from post
-    //     $is_image = Input::post('image');
+        #if image upload then get csrf token from post
+        $is_image = Input::post('image');
 
-    //     $by_pass_ajax = ($is_image === 'upload') ? true : false;
+        $by_pass_ajax = ($is_image === 'upload') ? true : false;
 
-    //     $csrf_token = Input::cookie('fuel_csrf_token');
+        $csrf_token = Input::cookie('fuel_csrf_token');
 
-    //     if((!Security::check_token($csrf_token) or (!Input::is_ajax() and !$by_pass_ajax)) and Fuel::$env !== Fuel::DEVELOPMENT and Fuel::$env !== Fuel::STAGE)
-    //         return $this->error('Invalid state.', 401);
+        if((!Security::check_token($csrf_token) or (!Input::is_ajax() and !$by_pass_ajax)) and Fuel::$env !== Fuel::DEVELOPMENT and Fuel::$env !== Fuel::STAGE)
+            return $this->error('Invalid state.', 401);
 
-    //     if(!$this->require_admin)
-    //         return parent::router($method, $params);
+        if(!$this->require_admin)
+            return parent::router($method, $params);
 
-    //     $authorised = $this->is_roles();
+        $authorised = $this->is_roles();
 
-    //     if(!$authorised)
-    //         return $this->error('Not authorized.', 401);
+        if(!$authorised)
+            return $this->error('Not authorized.', 401);
 
-    //     parent::router($method, $params);
+        parent::router($method, $params);
 
-    // }
+    }
 
     protected function success($message = 'OK.', $code = 200, $response = array())
     {

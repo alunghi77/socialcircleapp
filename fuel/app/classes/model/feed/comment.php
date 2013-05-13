@@ -25,4 +25,14 @@ class Model_Feed_Comment extends \Orm\Model
 	);
 	protected static $_table_name = 'feed_comments';
 
+	protected static $_belongs_to = array(
+	    'feed' => array(
+	        'key_from' => 'feed_id',
+	        'model_to' => 'Model_Feed',
+	        'key_to' => 'id',
+	        'cascade_save' => false,
+	        'cascade_delete' => false,
+	    )
+	);
+
 }

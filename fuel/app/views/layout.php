@@ -19,16 +19,16 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="span8">
+			<div class="span9">
 				<?php echo $nav; ?>
 			</div>
 			<?php if(Auth::check()):?>
-			<div id="profile" class="span4">
+			<div id="profile" class="span3">
 				<div class="image">
 
 				</div>
 				<div class="content">
-					<p class="title">Welcome, <strong><?php echo session::get('username');?></strong>!<br /> <a href="/logout">Logout</a></p>
+					<p class="title">Welcome, <strong><?php echo session::get('username');?></strong>! <a href="/logout">Logout</a></p>
 				</div>
 			</div>
 			<?php endif; ?>

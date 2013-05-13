@@ -4,18 +4,19 @@
 	<li class='<?php echo Arr::get($groupnav, "invite" ); ?>'><?php echo Html::anchor('/groups/invite','<i class="icon-flag"></i>');?></li>
 </ul>
 
+<h2><i class="icon-th-list"></i> List Circles</h2>
 <?php if(isset($circles) and is_array($circles)):?>
-<div class="groups span12">
+<div class="circles">
 
-<?php foreach($circles as $group ):?>
+<?php foreach($circles as $circle ):?>
 
-<div class="group">
+<div class="circle">
 		<div class="image span2">
 
 		</div>
-		<div class="content span10">
-			<h3 class="title"><?php echo $group->name;?></h3>
-			<p class="desc"><?php echo $group->desc;?></p>
+		<div class="content span8">
+			<h3 class="title"><?php echo $circle->name;?></h3>
+			<p class="desc"><?php echo $circle->desc;?></p>
 			<ul class="meta">
 				<li><a href="" class="join_group">join</a></li>
 			</ul>

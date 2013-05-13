@@ -25,4 +25,17 @@ class Model_Circle extends \Orm\Model
 	);
 	protected static $_table_name = 'circles';
 
+	protected static $_has_many = array(
+	    'members' => array(
+	        'key_from' => 'id',
+	        'model_to' => 'Model_Circles_Member',
+	        'key_to' 	=> 'circle_id',
+	        'cascade_save' => false,
+	        'cascade_delete' => true,
+	        'conditions' => array(
+	            'join_type' => 'left',
+	        ),
+	    ),
+	);
+
 }

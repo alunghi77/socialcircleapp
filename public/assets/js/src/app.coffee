@@ -1,5 +1,6 @@
 # Main app script
 
+
 # ---------------------------
 # Create user
 # ---------------------------
@@ -11,6 +12,53 @@ create_user = () ->
 	obj["email"] 	= $("#create_account #form_email").val()
 
 	$.post "/api/users", obj, (res,status)->
+
+		if res.head.success
+
+			console.log "success"
+
+	.fail (xhr) ->
+	
+		res = JSON.parse xhr.responseText
+		# handle errors	
+		console.log res.head.description
+
+	false
+
+
+# ---------------------------
+# Create Circle
+# ---------------------------
+create_circle = () ->
+
+	obj = {}
+	obj["name"] = $("#create_circle #form_name").val()
+	obj["desc"] = $("#create_circle #form_desc").val()
+	obj["invitees"] = $("#create_circle #form_invitees").val()
+
+	$.post "/api/circles", obj, (res,status)->
+
+		if res.head.success
+
+			console.log "success"
+
+	.fail (xhr) ->
+	
+		res = JSON.parse xhr.responseText
+		# handle errors	
+		console.log res.head.description
+
+	false
+
+# ---------------------------
+# Find User
+# ---------------------------
+find_user = () ->
+
+	obj = {}
+	obj["q"] 		= $("#create_circle #form_q").val()
+	
+	$.get "/api/users/search", obj, (res,status)->
 
 		if res.head.success
 
@@ -53,6 +101,9 @@ $ ->
 
 	# Create User
 	$("#action_signup").on "click", create_user
+
+	# Create Circle
+	$("#action_create_circle").on "click", create_circle
 
 	# Auth User
 	$("#action_signin").on "click", auth_user

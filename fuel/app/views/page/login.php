@@ -1,4 +1,6 @@
-<div class="login_panel">
+<?php if(!Auth::check()):?>
+
+<div class="login panel">
 	<h2>Login</h2>
 
 	<?php echo Form::open(array('action' => '/', 'method' => 'post', 'id' => 'form_login', 'name' => 'form_login')); ?>
@@ -7,7 +9,7 @@
 	<?php echo Form::close(); ?>
 </div>
 
-<div class="signup_panel">
+<div class="signup panel">
 	<h2>Create Account</h2>
 
 	<?php echo Form::open(array('action' => '/', 'method' => 'post', 'id' => 'form_signup', 'name' => 'form_signup')); ?>
@@ -15,3 +17,5 @@
 	<?php echo render('forms/_form_signup'); ?>
 	<?php echo Form::close(); ?>
 </div>
+
+<?php endif; ?>

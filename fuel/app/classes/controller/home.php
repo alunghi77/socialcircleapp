@@ -53,7 +53,8 @@ class Controller_Home extends Controller_Template
 
 	public function action_feed()
 	{
-		$data["subnav"] = array('feed'=> 'active' );
+		$data["subnav"] 	= array('feed'=> 'active' );
+		$data['circles']  	= Model_Circle::query()->get();
 
 		$view = View::forge('layout');
 		$view->title 	= 'Feed';

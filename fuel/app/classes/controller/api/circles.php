@@ -38,19 +38,39 @@ class Controller_Api_Circles extends Controller_Api
     	
     	# - params
 
-    	$name	= Input::post('name');
-		$desc 	= Input::post('desc');
-		$meta   = Input::post('meta', 'empty');
-		$status = Input::post('status','public');
+    	$name		= Input::post('name');
+		$desc 		= Input::post('desc');
+		$meta   	= Input::post('meta', 'empty');
+		$status 	= Input::post('status','public');
+		$invitees 	= Input::post('invitees', array()); #list of user ids
 
 		# - validation
 
-		$circle 		= new Model_Circle();
-		$circle->name 	= $name;
-		$circle->desc 	= $desc;
-		$circle->meta   = $meta;
-		$circle->status = $status;
+		$circle 		 = new Model_Circle();
+		$circle->name 	 = $name;
+		$circle->desc 	 = $desc;
+		$circle->meta    = $meta;
+		$circle->status  = $status;
+		
+		foreach($invitees as $user_id){
 
+			$circle->members[] = new Model_Circles_Member( 
+				array(
+				'user_id' => $user_id,
+				'status'  => 'pending', 
+				)
+			);
+
+		}
+
+		# add user that created circle
+		$circle->members[] = new Model_Circles_Member( 
+			array(
+			'user_id' => $this->_uid,
+			'status'  => 'approved', 
+			)
+		);
+		
 		$circle->save();
 
 		# - prepare response

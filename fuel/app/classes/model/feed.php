@@ -25,4 +25,17 @@ class Model_Feed extends \Orm\Model
 	);
 	protected static $_table_name = 'feeds';
 
+	protected static $_has_many = array(
+	    'comments' => array(
+	        'key_from' => 'id',
+	        'model_to' => 'Model_Feed_Comment',
+	        'key_to' 	=> 'feed_id',
+	        'cascade_save' => false,
+	        'cascade_delete' => true,
+	        'conditions' => array(
+	            'join_type' => 'left',
+	        ),
+	    ),
+	);
+
 }
