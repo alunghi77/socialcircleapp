@@ -1,0 +1,108 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs24 \cf0 \ul \ulc0 App Ideas: Social Circle\
+\
+\ulnone Problem: 
+\b0 working groups, small teams and other small scale organising units find it difficult to maintain a singular stream when collaborating on projects. The logistical burden of ensuring information is received by all members of the team, meeting dates are organised, minutes are distributed, reminders are sent, feedback is given ( i.e. members have seen documents, members notify if they are available on certain dates/time for meetings ), as well as meeting agendas that are clear, accomplishable, with tasks that can be delegated after the meeting, or past on to be discussed at another meeting. This is further complicated if people use a number of mediums to communicate - SMS to individuals, with individual responses sent to one person, emails on e-lists that appear with many other emails on an already busy inbox, Facebook PM's and Twitter DM's. \
+Peopl's lives are already running at a historically faster past, so providing a means to filter out the "noise", focus on specific communications channels that help groups work collaboratively and for everyone to keep in contact and be contactable. \
+\
+
+\b Solution:
+\b0  An integrated app that will channel communications into one endpoint, all information is centrally received and distributed - push notifications are sent mobile phones, with a digest sent via email.\
+\
+
+\b \ul Outcomes: 
+\b0 Extremely minimalist, simple to use, intuitive, responsive and immediately usable.\
+\ulnone \
+Features:\
+\
+1. Create Group: 	Ability to create a group and associate members\
+2. News Feed: 		Ability to send messages to a single stream\
+3. Events/Meetups: 	Ability to create events like meetings and for members to say which day they are free ( like doodle )\
+4. Agenda: 		Create a task-list style agenda, members can then vote up or down agenda suggestions ( agree or need to discuss )\
+5. Action Points: 	A to do list, and assignment, with dates. This can be set-up after the meeting after agreement. Reminders are sent out automatically. \
+6. Timeline:		Attendance, meetings, assignments, minutes attachments. \
+\
+User flow:\
+\
+Create an account 	-> Username / Password -> leads to settings\
+Login 			-> Auth -> \
+Settings 			-> Profile fields ( photo, name, mobile, email, available dates, work location, home location )\
+\
+Actions:\
+\
+Group 		- Accept invite to group / list groups / create group\
+News Feed	- \
+\
+\
+\
+1. Layout / Views - Prototype using ZURB\
+	- Create using FuelPHP\
+	- Set up User Login Screen, Settings Page\
+	- Views: Home, Settings, Group, NewsFeed\
+\
+
+\b \ul 2. Models
+\b0 \ulnone \
+\
+Users 	- created\
+Circles\
+	- name\
+	- desc\
+	- meta\
+	- status\
+\
+Circles_Members\
+	- circle_id\
+	- user_id\
+		\
+\
+Feeds \
+	- circle_id\
+	- user_id\
+	- message\
+	- status\
+\
+create feed item ( Top level )\
+	- user_id, connect to circle_id, message\
+\
+feed_comments\
+	- feed_id\
+	- user_id\
+	- message\
+	- status\
+\
+\
+\
+Done\
+\
+
+\b \ul 3. API
+\b0 \ulnone \
+\
+POST /api/users\
+POST /api/users/<id>/<action>\
+\
+users\
+circles\
+feeds\
+comments\
+\
+
+\b \ul Tasks
+\b0 \ulnone \
+\
+
+\b \ul Phase 1 ( user, settings, circles )
+\b0 \ulnone \
+\
+Create a user account. -- done though need to add name\
+Change settings.\
+Create circle.\
+Invite other members to join.\
+Join a group.\
+}
