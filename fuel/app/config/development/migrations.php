@@ -10,6 +10,7 @@ return array(
 				1 => '002_create_feeds',
 				2 => '003_create_feed_comments',
 				3 => '004_create_circles_members',
+				4 => '005_create_media',
 			),
 		),
 		'module' => 

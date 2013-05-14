@@ -9,8 +9,25 @@
 
 	)); ?>
 
+	<?php Asset::add_path('assets/js/libs','js');?>
 	<?php echo Asset::js(array(
 		'//code.jquery.com/jquery-1.9.1.min.js',
+		'handlebars/handlebars-1.0.rc.1.js',
+		'lazyload/jquery.lazyload.min.js',
+		'scrollTo/jquery.scrollTo-min.js',
+		'bootstrap/bootstrap.js',
+		'ajaxupload/ajax-uploader.js',
+		'scroller/CSSPlugin.min.js',
+		'scroller/jquery.mCustomScrollbar.js',
+		'scroller/jquery.mousewheel.js',
+		'scroller/TweenLite.min.js',
+		'tinyscrollbar/jquery.tinyscrollbar.min.js',
+		'pusher/pusher.min.js',
+
+	));?>
+
+	<?php echo Asset::js(array(
+		
 		'app.js',
 
 	)); ?>

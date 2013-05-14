@@ -24,6 +24,29 @@ class Controller_Api_Circles extends Controller_Api
 		# - send response
 		return parent::success('Created.', 201, array('data' => Format::forge( $circles )->to_array() ));
 
+	}
+
+	/**
+	 * GET /circles
+	 *
+	 **/
+	public function get_id()
+	{
+
+		# - auth
+    	
+    	# - params
+
+
+		# - validation
+
+		$circles = Model_Circle::query()->get();
+
+		# - prepare response
+
+		# - send response
+		return parent::success('Created.', 201, array('data' => Format::forge( $circles )->to_array() ));
+
 
 	}
 

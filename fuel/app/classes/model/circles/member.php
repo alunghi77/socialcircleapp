@@ -34,4 +34,16 @@ class Model_Circles_Member extends \Orm\Model
 	    )
 	);
 
+	protected static $_has_one = array(
+	    'user' => array(
+	        'key_from' => 'user_id',
+	        'model_to' => 'Auth\Model\Auth_User',
+	        'key_to' 	=> 'id',
+	        'cascade_save' => false,
+	        'cascade_delete' => true,
+	        'conditions' => array(
+	            'join_type' => 'left',
+	        ),
+	    ),
+	);
 }

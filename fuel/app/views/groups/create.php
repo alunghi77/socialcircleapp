@@ -5,7 +5,7 @@
 </ul>
 
 <div class="create_group panel">
-	<h2>Create Group</h2>
+	<h2>Create Circle</h2>
 
 	<?php echo Form::open(array('action' => '/', 'method' => 'post', 'id' => 'form_signup', 'name' => 'form_signup')); ?>
 	<?php echo Form::hidden(Config::get('security.csrf_token_key'), Security::fetch_token());?>

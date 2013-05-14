@@ -36,6 +36,16 @@ class Model_Circle extends \Orm\Model
 	            'join_type' => 'left',
 	        ),
 	    ),
+	    'feeds' => array(
+	        'key_from' => 'id',
+	        'model_to' => 'Model_Feed',
+	        'key_to' 	=> 'circle_id',
+	        'cascade_save' => false,
+	        'cascade_delete' => true,
+	        'conditions' => array(
+	            'join_type' => 'left',
+	        ),
+	    ),
 	);
 
 }

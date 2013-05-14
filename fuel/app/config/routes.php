@@ -12,5 +12,7 @@ return array(
 	/* API */
 	'api/users/(:num)' 		=> 'api/users/id/$1',
 	'api/circles/(:num)' 	=> 'api/circles/id/$1',
+	'api/feeds/(:num)' 		=> 'api/feeds/id/$1',
+	'api/comments/(:num)' 	=> 'api/comments/id/$1',
 
 );
