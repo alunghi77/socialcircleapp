@@ -32,7 +32,17 @@
 	<div class="clearfix">
 		<div class="input">
 	  		<div class="input-toolbar">
-	  			<?php echo Form::hidden('media_url',0, array('data-media'=>'0')); ?>
+	  			<?php $media_url = "0"; ?>
+
+	  			<?php if( isset($usermedia) ): ?>
+	  				<?php list(, $userid) = Auth::get_user_id();?>
+	  				<?php $media_url = '/files/profiles/user_'.$userid.'/'.$usermedia->object['normal'];?>
+	  				<div class="media_current">
+	  					<img src="<?php echo $media_url;?>" />
+	  				</div>
+		  		<?php endif; ?>
+
+	  			<?php echo Form::hidden('media_url',$media_url, array('data-media'=> $media_url)); ?>
 	  			<div class="media_film_strip">
   				<a href="" class="nav_photo_sprite" id="scroller_left"></a>
   				<div id="media_upload_preview">

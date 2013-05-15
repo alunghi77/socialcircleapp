@@ -48,21 +48,39 @@ create_comment = (e) ->
 create_user = () ->
 
 	obj = {}
-	obj["username"] = $("#create_account #form_username").val()
-	obj["password"] = $("#create_account #form_password").val()
-	obj["email"] 	= $("#create_account #form_email").val()
+	obj["username"] 	= $("#create_account #form_username").val()
+	obj["password"] 	= $("#create_account #form_password").val()
+	obj["fullname"] 	= $("#create_account #form_fullname").val()
+	obj["email"] 		= $("#create_account #form_email").val()
+	obj["media_data"] 	= JSON.parse $("#create_account #form_media_url").attr("data-media")
+	obj["media_url"] 	= $("#create_account #form_media_url").val()
+	obj["mobile"] 		= $("#create_account #form_mobile").val()
+	obj["resources"] 	= $("#create_account #form_resources").attr("data-resources")
+	obj["skills"] 		= $("#create_account #form_skills").attr("data-skills")
+
+	$(".alert").slideUp "fast", () ->
+
+		$(@).empty()
 
 	$.post "/api/users", obj, (res,status)->
 
 		if res.head.success
 
-			console.log "success"
+			$(".alert-success").fadeIn "fast"
+			$(".alert-success").animate { height:"40px"}, 500, () ->
+
+				$(@).append("<p>Great! Your have successfully created an account</p>")
 
 	.fail (xhr) ->
 	
 		res = JSON.parse xhr.responseText
 		# handle errors	
 		console.log res.head.description
+
+		$(".alert-error").fadeIn "fast"
+		$(".alert-error").animate { height:"40px"}, 500, () ->
+
+			$(@).append("<p>Ooops! You didn't fill out all the required fields.</p>")
 
 	false
 
@@ -75,7 +93,6 @@ update_user = () ->
 	obj["username"] 	= $("#form_settings #form_username").val()
 	obj["fullname"] 	= $("#form_settings #form_fullname").val()
 	obj["email"] 		= $("#form_settings #form_email").val()
-	obj["media_data"] 	= JSON.parse $("#form_settings #form_media_url").attr("data-media")
 	obj["media_url"] 	= $("#form_settings #form_media_url").val()
 	obj["mobile"] 		= $("#form_settings #form_mobile").val()
 	obj["resources"] 	= $("#form_settings #form_resources").attr("data-resources")

@@ -31,15 +31,35 @@
     obj = {};
     obj["username"] = $("#create_account #form_username").val();
     obj["password"] = $("#create_account #form_password").val();
+    obj["fullname"] = $("#create_account #form_fullname").val();
     obj["email"] = $("#create_account #form_email").val();
+    obj["media_data"] = JSON.parse($("#create_account #form_media_url").attr("data-media"));
+    obj["media_url"] = $("#create_account #form_media_url").val();
+    obj["mobile"] = $("#create_account #form_mobile").val();
+    obj["resources"] = $("#create_account #form_resources").attr("data-resources");
+    obj["skills"] = $("#create_account #form_skills").attr("data-skills");
+    $(".alert").slideUp("fast", function() {
+      return $(this).empty();
+    });
     $.post("/api/users", obj, function(res, status) {
       if (res.head.success) {
-        return console.log("success");
+        $(".alert-success").fadeIn("fast");
+        return $(".alert-success").animate({
+          height: "40px"
+        }, 500, function() {
+          return $(this).append("<p>Great! Your have successfully created an account</p>");
+        });
       }
     }).fail(function(xhr) {
       var res;
       res = JSON.parse(xhr.responseText);
-      return console.log(res.head.description);
+      console.log(res.head.description);
+      $(".alert-error").fadeIn("fast");
+      return $(".alert-error").animate({
+        height: "40px"
+      }, 500, function() {
+        return $(this).append("<p>Ooops! You didn't fill out all the required fields.</p>");
+      });
     });
     return false;
   };
@@ -50,7 +70,6 @@
     obj["username"] = $("#form_settings #form_username").val();
     obj["fullname"] = $("#form_settings #form_fullname").val();
     obj["email"] = $("#form_settings #form_email").val();
-    obj["media_data"] = JSON.parse($("#form_settings #form_media_url").attr("data-media"));
     obj["media_url"] = $("#form_settings #form_media_url").val();
     obj["mobile"] = $("#form_settings #form_mobile").val();
     obj["resources"] = $("#form_settings #form_resources").attr("data-resources");

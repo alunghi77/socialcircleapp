@@ -99,13 +99,14 @@ class Controller_Api_Users extends Controller_Api
 
 		# --> validation
 
-		$val = Validation::forge('create_user');
+		$to_update = array(
 
-		$val->add_field('name', 'Name', 'required|trim|strip_tags');
-		$val->add_field('profession', 'Specialism','required|trim|strip_tags');
-		$val->add_field('email', 'Specialism','required|trim|strip_tags|valid_email');
-		$val->add_field('bio', 'Bio','required|trim|strip_tags|max_length[300]');
-		$val->add_field('group', 'Group','required');
+			'fullname' 	=> Input::post('fullname', false),
+			'mobile'	=> Input::post('mobile', false), 
+			'resources'	=> Input::post('resources', false), 
+			'skills' 	=> Input::post('skills', false),
+
+		);
 
 		$username 	  	= Input::post('username'); 
 		$password		= Input::post('password'); 
@@ -115,19 +116,43 @@ class Controller_Api_Users extends Controller_Api
 
 		try {
 
+
 			// create a new user
 			$user_id = Auth::create_user(
 			    $username,
 			    $password,
 			    $email,
 			    1,
-			    array(
-			        'testmeta' => $username.' + '.$email,
-			    )
+			    $to_update
 			);
 			
 			# If user account created
     		if ( $user_id ) {
+
+    			$data['media_url'] 	= Input::post('media_url',"0");
+    			$data['user']['id'] = $user_id;
+
+				# if new profile image
+
+				if ($data['media_url'] !== "0"){
+
+					$profile_pic = $this->save_profile_image($data);
+
+			    	if (!($usermedia = Model_Usermedia::find($user_id))){
+
+			    		$usermedia = new Model_Usermedia( array( 'user_id' => $user_id,'object' => $this->save_profile_image($data) ) );
+			    	
+			    	} else {
+
+			    		$usermedia->object = $this->save_profile_image($data);
+
+			    	}
+
+			    	$usermedia->save();
+
+			    	return parent::success('OK.', 200, array( 'data' => array( 'id' => $user_id ) ) );
+
+				}
 
 				$this->_data = array( 
 
@@ -188,56 +213,63 @@ class Controller_Api_Users extends Controller_Api
 		// $val->add_field('email', 'Specialism','required|trim|strip_tags|valid_email');
 		// $val->add_field('bio', 'Bio','required|trim|strip_tags|max_length[300]');
 
-		$media_url 	= Input::post('media_url', false);
+		Auth::update_user($to_update, $user['username']);
+
+		$data['media_url'] 	= Input::post('media_url', "0");
 
 		# if new profile image
 
-		if ($media_url !== "0"){
+		if ($data['media_url'] !== "0"){
 
-			# store profile pic locally
-			$profile_pic_thumb 	= \Request::forge($media_url, array('driver' => 'curl', 'set_options' => array(CURLOPT_HEADER => false)))->execute();
-			$unique_id 			= Str::random('unique');
-			$ext 				= str_replace('image/','',$profile_pic_thumb->response_info('content_type'));
+			$data['user'] = $user;
 
-			$path_to_profile 	= DOCROOT.'files'.DS.'profiles'.DS.'user_'.$user['id'];
-			$path_to_base		= DOCROOT.'files'.DS.'profiles'.DS;
+			$profile_pic = $this->save_profile_image($data);
 
-			if (!file_exists( $path_to_profile )){
+	    	if (!($usermedia = Model_Usermedia::find($id))){
 
-				File::create_dir( $path_to_base,'user_'.$user['id'], 0777 );
+	    		$usermedia = new Model_Usermedia( array( 'user_id' => $id,'object' => $this->save_profile_image($data) ) );
+	    	
+	    	} else {
 
-			} 
-				
-			File::create( $path_to_profile.DS,$unique_id.'.'.$ext, $profile_pic_thumb );
+	    		$usermedia->object = $this->save_profile_image($data);
 
-			Image::load( $path_to_profile.DS.$unique_id.'.'.$ext )
-				->crop_resize(50,50)
-				->rounded(8, null, 1)
-				->save_pa('rounded_');
+	    	}
 
-			$profile_pic = array(
-	    		'rounded'	=> 'rounded_'.$unique_id.'.'.$ext,
-	    		'normal'	=> $unique_id.'.'.$ext,
-	    	);
-
-	    	$to_update = array_merge( 
-	    		$to_update, 
-				array(
-					'profile_pic' => $profile_pic,
-				)
-			);
+	    	$usermedia->save();
 
 		}
 
-		Auth::update_user($to_update, $user['username']);
+		return parent::success('OK.', 200, array( 'data' => array( 'id' => $id ) ) );
 
-		$this->_data = array( 
+	}
 
-			'id' => $id,
+	private function save_profile_image($data){
 
-		);
+		# store profile pic locally
+		$profile_pic_thumb 	= \Request::forge( $data['media_url'], array('driver' => 'curl', 'set_options' => array(CURLOPT_HEADER => false)))->execute();
+		$unique_id 			= Str::random('unique');
+		$ext 				= str_replace('image/','',$profile_pic_thumb->response_info('content_type'));
 
-		return parent::success('OK.', 200, array( 'data' => $this->_data ) );
+		$path_to_profile 	= DOCROOT.'files'.DS.'profiles'.DS.'user_'.$data['user']['id'];
+		$path_to_base		= DOCROOT.'files'.DS.'profiles'.DS;
+
+		if (!file_exists( $path_to_profile )){
+
+			File::create_dir( $path_to_base,'user_'.$data['user']['id'], 0777 );
+
+		} 
+			
+		File::create( $path_to_profile.DS,$unique_id.'.'.$ext, $profile_pic_thumb );
+
+		Image::load( $path_to_profile.DS.$unique_id.'.'.$ext )
+			->crop_resize(50,50)
+			->rounded(8, null, 1)
+			->save_pa('rounded_');
+
+		return array(
+    		'rounded'	=> 'rounded_'.$unique_id.'.'.$ext,
+    		'normal'	=> $unique_id.'.'.$ext,
+    	);
 
 	}
 

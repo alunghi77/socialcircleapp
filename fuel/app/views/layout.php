@@ -42,10 +42,10 @@
 			<?php if(Auth::check()):?>
 			<div id="profile" class="span3">
 				<div class="image">
-
+	  				<img src="<?php echo $media_url;?>" />
 				</div>
 				<div class="content">
-					<p class="title">Welcome, <strong><?php echo session::get('username');?></strong>! <a href="/logout">Logout</a></p>
+					<p class="title">Welcome, <strong><?php echo $current_user_fullname;?></strong>! <a href="/logout">Logout</a></p>
 				</div>
 			</div>
 			<?php endif; ?>

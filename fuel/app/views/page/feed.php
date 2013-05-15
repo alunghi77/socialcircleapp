@@ -76,7 +76,9 @@
 	<div class="feed feed-{{this.id}}">
 		<div class="feed-posted-by">
 			<div class="image">
-			
+			{{#if this.posted_by.profile_pic}}
+				<img src="{{this.posted_by.profile_pic}}" />
+			{{/if}}
 			</div>
 		</div>
 		<div class="feed-content">
@@ -97,7 +99,9 @@
 		{{#each this.comments}}
 		<div class="feed-comment">
 			<div class="image">
-				
+			{{#if this.posted_by.profile_pic}}
+				<img src="{{this.posted_by.profile_pic}}" />
+			{{/if}}
 			</div>
 			<div class="content">
 				<p>
@@ -112,7 +116,9 @@
 		<div class="create-comment">
 			<div class="clearfix">
 				<div class="image image-small">
-
+					{{#if this.posted_by.profile_pic}}
+						<img src="{{this.posted_by.profile_pic}}" />
+					{{/if}}
 				</div>
 				<div class="input content" >
 					<input class="xlarge" placeholder="add a comment..." name="feed_comment" value="" type="text" id="form_feed_comment" data-id="{{this.id}}"/>
@@ -133,7 +139,9 @@
 	{{#each comments}}		
 	<div class="feed-comment">
 		<div class="image">
-			
+		{{#if this.posted_by.profile_pic}}
+			<img src="{{this.posted_by.profile_pic}}" />
+		{{/if}}	
 		</div>
 		<div class="content">
 			<p>

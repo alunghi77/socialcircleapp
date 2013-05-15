@@ -101,16 +101,21 @@ class Controller_Api_Feeds extends Controller_Api
 
 				foreach($item->comments as $comment){
 
+					$usermedia = Model_Usermedia::query()->where('user_id',$comment->user->id)->get_one();
+
 					$comments[] = array(
 						'id' => $comment->id,
 						'message' 	=> $comment->message,
 						'posted_by' =>  array(
-							'name' 	=> ucwords($comment->user->username),
+							'name' 			=> ucwords($comment->user->username),
+							'profile_pic' 	=> '/files/profiles/user_'.$comment->user->id.'/'.$usermedia->object['rounded'],
 						),
 						'time_ago' => Date::time_ago($comment->created_at),
 					);
 
 				}
+
+				$usermedia = Model_Usermedia::query()->where('user_id',$item->user->id)->get_one();
 
 				$feeds_arr['data'][] = array(
 
@@ -119,8 +124,9 @@ class Controller_Api_Feeds extends Controller_Api
 					'media' 	=> $item->media,
 					'comments'  => $comments,
 					'posted_by' => array(
-						'id' 	=> $item->user->id,
-						'username' => $item->user->username,
+						'id' 			=> $item->user->id,
+						'username' 		=> $item->user->username,
+						'profile_pic' 	=> '/files/profiles/user_'.$item->user->id.'/'.$usermedia->object['rounded'],
 						),
 					'created_at' => $item->user->created_at,
 

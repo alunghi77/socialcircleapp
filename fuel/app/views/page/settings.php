@@ -1,4 +1,5 @@
-<?php $data['user'] = $user;?>
+<?php $data['user'] 		= $user;?>
+<?php $data['usermedia'] 	= $usermedia;?>
 <div class="settings panel">
 	<h2>User setting</h2>
 	<div class="alert alert-success"></div>

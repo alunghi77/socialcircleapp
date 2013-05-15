@@ -11,7 +11,7 @@ body 			{ background-color: #f0f0f0; font-family: 'lucida grande';line-height: 1
 /* App User Profile */
 
 #profile { text-align: right; position: relative;overflow: hidden;top:25px;}
-#profile .image { background-color: #fff;width:44px;height:44px;border:1px solid #aaa;float:left;margin-right: 5px; border-radius: 30px}
+#profile .image img { width:44px;height:44px;float:left;margin-right: 5px; border-radius: 30px}
 #profile .content { float:left;width:165px;padding-top: 12px}
 #profile .content .title { }
 
@@ -133,6 +133,8 @@ border: 0px;padding:10px 14px;font-size: 14px; margin-top: 20px;}
 .media_film_strip          { width:435px;height: 290px;position: relative;left: 0px;overflow: hidden;top:10px;background: #000;display:none;margin-bottom: 20px;}
 .media_film_strip ul       { list-style-type: none;position: relative;overflow: hidden;margin:0px;height: 100%;}
 .media_film_strip li       { width: 394px;height: 280px;margin: 0px;float: left;text-align: center;padding-left: 0px;}
+
+.media_current { text-align: center; background-color: #d7d7d7;width: 445px;}
 
 .image-large              { width: 400px;height: 400px;background-color: #eee; }
 .image-feed-small         { width: 40px;height: 40px;background-color: #eee; }
