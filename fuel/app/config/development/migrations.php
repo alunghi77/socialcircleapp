@@ -12,6 +12,7 @@ return array(
 				3 => '004_create_circles_members',
 				4 => '005_create_media',
 				5 => '006_create_usermedia',
+				6 => '007_create_circlemedia',
 			),
 		),
 		'module' => 

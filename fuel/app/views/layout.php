@@ -33,7 +33,7 @@
 	)); ?>
 	
 </head>
-<body>
+<body class="<?php echo $pageclass;?>">
 	<div class="container">
 		<div class="row">
 			<div class="span9">

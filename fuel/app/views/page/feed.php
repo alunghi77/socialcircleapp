@@ -10,7 +10,16 @@
 
 	<div class="circle">
 		<div class="image span2">
-			<a href="#" role="button" data-id="<?php echo $circle->id;?>" class="popover-test circle-tooltip" data-toggle="popover" data-original-title="A Title" data-content="<?php echo $circle->name;?>"></a>
+			<a href="#" role="button" data-id="<?php echo $circle->id;?>" class="popover-test circle-tooltip switch_circle" data-toggle="popover" data-original-title="A Title" data-content="<?php echo $circle->name;?>">
+		<?php if( isset($circle->circlemedia) and count($circle->circlemedia) > 0 ): ?>
+			<?php foreach( $circle->circlemedia as $media ):?>
+				<?php if ( $media->type === 'profile') : ?>
+				<?php $media_url = '/files/circles/circle_'.$media->circle_id.'/'.$media->object['rounded'];?>
+					<img src="<?php echo $media_url;?>" />
+				<?php break; endif; ?>
+			<?php endforeach; ?>
+  		<?php endif; ?>
+			</a>
 		</div>
 	</div>
 
@@ -23,6 +32,10 @@
 		<p>No groups listed</p>
 
 	<?php endif; ?>
+
+</div>
+
+<div class="circle_container">	
 
 </div>
 
@@ -153,4 +166,29 @@
 	
 </script>
 
+
+<!-- Circle Expand TMPL -->
+<script id="circle-tmpl" type="text/x-handlebars-template">
+	
+	<div class="image">
+		<img src="{{circle.profile_pic}}" />
+	</div>
+	<div class="content">
+		<h4>{{circle.name}}</h4>
+		<p>{{circle.desc}}</p>
+		<div class="members">
+			{{#each circle.members.data}}
+			<div class="member">
+				<div class="image">
+					<img src="{{this.posted_by.profile_pic}}" />
+				</div>
+				<div class="content">
+					<h6>{{this.posted_by.fullname}}</h6>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+	
+</script>
 

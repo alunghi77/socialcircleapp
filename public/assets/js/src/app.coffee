@@ -133,15 +133,23 @@ update_user = () ->
 create_circle = () ->
 
 	obj = {}
-	obj["name"] = $("#create_circle #form_name").val()
-	obj["desc"] = $("#create_circle #form_desc").val()
-	obj["invitees"] = $("#create_circle #form_invitees").val()
+	obj["name"] 	 = $("#create_circle #form_name").val()
+	obj["desc"] 	 = $("#create_circle #form_desc").val()
+	obj["invitees"]  = $("#create_circle #form_invitees").val()
+	obj["media_url"] = $("#create_circle #form_media_url").val()
+
+	$(".alert").slideUp "fast", () ->
+
+		$(@).empty()
 
 	$.post "/api/circles", obj, (res,status)->
 
 		if res.head.success
 
-			console.log "success"
+			$(".alert-success").fadeIn "fast"
+			$(".alert-success").animate { height:"40px"}, 500, () ->
+
+				$(@).append("<p>Great! Your have successfully created an account</p>")
 
 	.fail (xhr) ->
 	
@@ -149,7 +157,52 @@ create_circle = () ->
 		# handle errors	
 		console.log res.head.description
 
+		$(".alert-error").fadeIn "fast"
+		$(".alert-error").animate { height:"40px"}, 500, () ->
+
+			$(@).append("<p>Ooops! You didn't fill out all the required fields.</p>")
+
 	false
+
+# ---------------------------
+# Update Circle
+# ---------------------------
+update_circle = () ->
+
+	obj = {}
+	obj["name"] 		= $("#form_edit_circle #form_name").val()
+	obj["desc"] 		= $("#form_edit_circle #form_desc").val()
+	obj["invitees"] 	= $("#form_edit_circle #form_invitees").val()
+	obj["media_url"] 	= $("#form_edit_circle #form_media_url").val()
+
+	id = $("#form_edit_circle #form_id").val()
+
+	$(".alert").slideUp "fast", () ->
+
+		$(@).empty()
+
+	$.post "/api/circles/#{id}", obj, (res,status)->
+
+		if res.head.success
+
+			$(".alert-success").fadeIn "fast"
+			$(".alert-success").animate { height:"40px"}, 500, () ->
+
+				$(@).append("<p>Great! Your have successfully updated your circle</p>")
+
+	.fail (xhr) ->
+	
+		res = JSON.parse xhr.responseText
+		# handle errors	
+		console.log res.head.description
+
+		$(".alert-error").fadeIn "fast"
+		$(".alert-error").animate { height:"40px"}, 500, () ->
+
+			$(@).append("<p>Ooops! You didn't fill out all the required fields.</p>")
+
+	false
+
 
 # ---------------------------
 # Switch Circle
@@ -162,11 +215,31 @@ switch_circle = () ->
 
 	$(".create-feed").addClass("ajax-small")
 
+
+
+	# Fecth Feeds
+
 	$(".feeds").fadeOut "slow", ()->
+	
+	$(".circle_container").slideUp "fast", ()->
+
+		$(@).empty()
 
 	$.get "/api/feeds/#{id}", (res,status)->
 
-		if res.head.success			
+		if res.head.success	
+
+			# ---------------------------
+			# Render tmpl
+			# ---------------------------
+
+			template 	= Handlebars.compile $("#circle-tmpl").html()
+			html 	 	= $.trim template {"circle":res.data }	
+
+			console.log res.data
+
+			$(".circle_container").append( html );	
+			$(".circle_container").slideDown "slow"
 
 			# ---------------------------
 			# Display Media
@@ -487,7 +560,7 @@ preview_media_api = ( url ) ->
 $ ->
 
 	# Circle Select 
-	$(".circle a").on "click", switch_circle
+	$(".switch_circle").on "click", switch_circle
 
 	# Circle Toolip
 	$(".circle-tooltop").popover()
@@ -500,6 +573,9 @@ $ ->
 
 	# Create Circle
 	$("#action_create_circle").on "click", create_circle
+
+	# Create Circle
+	$("#action_update_circle").on "click", update_circle
 
 	# Create Feed
 	$(".create-feed #form_discussion").keyup (e) ->

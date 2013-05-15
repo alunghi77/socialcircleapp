@@ -61,6 +61,8 @@ class Controller_Api_Feeds extends Controller_Api
 			'id' 		=> $data['id'],
 			'name' 		=> $data['name'],
 			'meta'		=> $data['meta'],
+			'desc'		=> $data['desc'],
+			'profile_pic' => '/files/circles/circle_'.$data['id'].'/'.$data['circlemedia'][1]->object['rounded'],
 			'slug' 		=> 'none',
 			'members' 	=> array(),  # list of members of the circle
 			'feeds' 	=> array(),  # list of feed items
@@ -75,11 +77,17 @@ class Controller_Api_Feeds extends Controller_Api
 
 			foreach( $data->members as $item ){
 
+				$usermedia = Model_Usermedia::query()->where('user_id',$item->user->id)->get_one();
+
 				$members_arr['data'][] = array(
 
-					'id' => $item->id,
-					'created_at' => $item->user->created_at,
-
+					'posted_by' => array(
+						'id' 			=> $item->user->id,
+						'username' 		=> $item->user->username,
+						'fullname' 		=> Auth::get_profile_fields('fullname',$item->user->username ),
+						'profile_pic' 	=> '/files/profiles/user_'.$item->user->id.'/'.$usermedia->object['rounded'],
+						'created_at' 	=> $item->user->created_at,
+					),
 				);
 			}
 

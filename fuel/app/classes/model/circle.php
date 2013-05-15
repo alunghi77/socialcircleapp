@@ -46,6 +46,16 @@ class Model_Circle extends \Orm\Model
 	            'join_type' => 'left',
 	        ),
 	    ),
+	    'circlemedia' => array(
+	        'key_from' => 'id',
+	        'model_to' => 'Model_Circlemedia',
+	        'key_to' 	=> 'circle_id',
+	        'cascade_save' => false,
+	        'cascade_delete' => true,
+	        'conditions' => array(
+	            'join_type' => 'left',
+	        ),
+	    ),
 	);
 
 }

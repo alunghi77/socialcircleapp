@@ -23,7 +23,9 @@ class Controller_Home extends Controller_Template
 
 	public function action_index()
 	{
-		$data["subnav"] = array('home'=> 'active' );
+		$data["subnav"] 	= array('home'=> 'active' );
+
+		View::set_global('pageclass', 'home_page');
 
 		$view = View::forge('layout');
 		$view->title 	= 'Home';
@@ -35,7 +37,9 @@ class Controller_Home extends Controller_Template
 	
 	public function action_login()
 	{
-		$data["subnav"] = array('login'=> 'active' );
+		$data["subnav"] 	= array('login'=> 'active' );
+
+		View::set_global('pageclass', 'login_page');
 
 		$view = View::forge('layout');
 		$view->title 	= 'Login';
@@ -47,7 +51,6 @@ class Controller_Home extends Controller_Template
 
 	public function action_logout()
 	{
-
 		$auth = Auth::instance();
 
 		if ( $auth->logout() ){
@@ -59,9 +62,11 @@ class Controller_Home extends Controller_Template
 
 	public function action_settings()
 	{
-		$data["subnav"] = array('settings'=> 'active' );
+		$data["subnav"] 	= array('settings'=> 'active' );
 
-		$user       	= \Auth::instance()->get_user_id();
+		View::set_global('pageclass', 'settings_page');
+
+		$user       		= \Auth::instance()->get_user_id();
 
         $data['user'] 		= Auth\Model\Auth_User::find($user[1]);
 
@@ -78,6 +83,9 @@ class Controller_Home extends Controller_Template
 	public function action_feed()
 	{
 		$data["subnav"] 	= array('feed'=> 'active' );
+		
+		View::set_global('pageclass', 'feed_page');
+
 		$data['circles']  	= Model_Circle::query()->get();
 
 		$view = View::forge('layout');
