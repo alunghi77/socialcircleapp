@@ -43,6 +43,13 @@ class Controller_Home extends Controller_Template
 	{
 		$data["subnav"] = array('settings'=> 'active' );
 
+		$user       	= \Auth::instance()->get_user_id();
+
+        $data['user'] 	= Auth\Model\Auth_User::find($user[1]);
+
+        // print '<pre>';
+        // var_dump($data['user']->metadata);exit();	
+
 		$view = View::forge('layout');
 		$view->title 	= 'Settings';
 		$view->nav 		= View::forge('nav', $data);

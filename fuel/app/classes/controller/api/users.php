@@ -157,89 +157,87 @@ class Controller_Api_Users extends Controller_Api
 	 **/
 	public function post_id( $id = false )
 	{
-		if ( !Auth::has_access('users.update') or ((int) $id !== $this->uid) and !Auth::has_access('users.create'))
-			return parent::error('Not authorized', 401);
+		
+		# Auth
 
-		if ( !($user = Model_User::find($id)) )
+		// if ( !Auth::has_access('users.update') or ((int) $id !== $this->uid) and !Auth::has_access('users.create'))
+		// 	return parent::error('Not authorized', 401);
+
+		if (!($user = Auth\Model\Auth_User::find($id)))
 			return parent::error('Not Found', 404);
 
-		$val = Validation::forge('user_update');
 
-		$val->add_field('name', 'Name', 'required|trim|strip_tags');
-		$val->add_field('profession', 'Specialism','required|trim|strip_tags');
-		$val->add_field('email', 'Specialism','required|trim|strip_tags|valid_email');
-		$val->add_field('bio', 'Bio','required|trim|strip_tags|max_length[300]');
+		# params
 
-		if ($val->run()){
+		$to_update = array(
 
-			$name 				= Input::post('name');
-			$profession 		= Input::post('profession');
-			$email 				= Input::post('email'); 
-			$bio 				= Input::post('bio'); 
-			$post_to_facebook 	= Input::post('post_to_facebook'); 
-			$group 				= Input::post('group');
-			$media_url 			= Input::post('media_url');
+			'fullname' 	=> Input::post('fullname', false),
+			'email' 	=> Input::post('email'),
+			'mobile'	=> Input::post('mobile', false), 
+			'resources'	=> Input::post('resources', false), 
+			'skills' 	=> Input::post('skills', false),
 
-			# If admin user then allow to update group and use first and last name fields
-			if (Auth::has_access('users.create') and (int) $id !== $this->uid)
-				$user->group= isset($group) ? $group : $user->group;
+		);
 
-			# update user profile pic
-			
-			if ($media_url !== "false"){
+		# Validation
 
-				# store profile pic locally
-				$profile_pic_thumb 	= \Request::forge($media_url, array('driver' => 'curl', 'set_options' => array(CURLOPT_HEADER => false)))->execute();
-				$unique_id 			= Str::random('unique');
-				$ext 				= str_replace('image/','',$profile_pic_thumb->response_info('content_type'));
+		// $val = Validation::forge('user_update');
 
-				$path_to_profile 	= DOCROOT.'files'.DS.'profile_'.$user['profile_fields']['fb_id'].DS;
+		// $val->add_field('name', 'Name', 'required|trim|strip_tags');
+		// $val->add_field('profession', 'Specialism','required|trim|strip_tags');
+		// $val->add_field('email', 'Specialism','required|trim|strip_tags|valid_email');
+		// $val->add_field('bio', 'Bio','required|trim|strip_tags|max_length[300]');
 
-				if (!file_exists( $path_to_profile ))
-					File::create_dir( $path_to_profile , 0777 );
+		$media_url 	= Input::post('media_url', false);
+
+		# if new profile image
+
+		if ($media_url !== "0"){
+
+			# store profile pic locally
+			$profile_pic_thumb 	= \Request::forge($media_url, array('driver' => 'curl', 'set_options' => array(CURLOPT_HEADER => false)))->execute();
+			$unique_id 			= Str::random('unique');
+			$ext 				= str_replace('image/','',$profile_pic_thumb->response_info('content_type'));
+
+			$path_to_profile 	= DOCROOT.'files'.DS.'profiles'.DS.'user_'.$user['id'];
+			$path_to_base		= DOCROOT.'files'.DS.'profiles'.DS;
+
+			if (!file_exists( $path_to_profile )){
+
+				File::create_dir( $path_to_base,'user_'.$user['id'], 0777 );
+
+			} 
 				
-				File::create( $path_to_profile.DS,$unique_id.'.'.$ext, $profile_pic_thumb );
+			File::create( $path_to_profile.DS,$unique_id.'.'.$ext, $profile_pic_thumb );
 
-				Image::load( $path_to_profile.DS.$unique_id.'.'.$ext )
-					->crop_resize(50,50)
-					->rounded(8, null, 1)
-					->save_pa('rounded_');
+			Image::load( $path_to_profile.DS.$unique_id.'.'.$ext )
+				->crop_resize(50,50)
+				->rounded(8, null, 1)
+				->save_pa('rounded_');
 
-				$profile_pic = array(
-		    		'rounded'	=> 'rounded_'.$unique_id.'.'.$ext,
-		    		'normal'	=> $unique_id.'.'.$ext,
-		    	);
+			$profile_pic = array(
+	    		'rounded'	=> 'rounded_'.$unique_id.'.'.$ext,
+	    		'normal'	=> $unique_id.'.'.$ext,
+	    	);
 
-		    	$user->profile_fields = array_merge( 
-		    		$user->profile_fields, 
-					array(
-						'profile_pic' => $profile_pic,
-					)
-				);
-
-			}
-
-			$user->profile_fields = array_merge( $user->profile_fields, 
+	    	$to_update = array_merge( 
+	    		$to_update, 
 				array(
-					'name' => $name,
-					'bio' => $bio,
-					'post_to_facebook' => $post_to_facebook,
-					'profession' => $profession,
+					'profile_pic' => $profile_pic,
 				)
 			);
 
-			$user->email = $email;
-			$user->save();
+		}
 
-			$this->_data = array( 
+		Auth::update_user($to_update, $user['username']);
 
-				'id' => $user->id,
+		$this->_data = array( 
 
-			);
+			'id' => $id,
 
-			return parent::success('OK.', 200, array( 'data' => $this->_data ) );
+		);
 
-		} 
+		return parent::success('OK.', 200, array( 'data' => $this->_data ) );
 
 	}
 

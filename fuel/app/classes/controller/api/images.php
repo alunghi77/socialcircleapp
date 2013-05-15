@@ -129,9 +129,9 @@ class Controller_Api_Images extends Controller_Api
 
                         $sizes = Image::sizes(DOCROOT.'files'.DS.'feeds'.DS.$response_arr["saved_as"]);
 
-                        if ($sizes->width >= 415 ){
+                        if ($sizes->width >= 400){
 
-                            Image::load(DOCROOT.'files'.DS.'feeds'.DS.$response_arr["saved_as"])->resize(500,null)->save_pa('cropped_'.$unique_id);
+                            Image::load(DOCROOT.'files'.DS.'feeds'.DS.$response_arr["saved_as"])->resize(400,null)->save_pa('cropped_'.$unique_id);
 
                             $image_src = Uri::base(false).Str::lower('files/feeds/cropped_'.$unique_id.$response_arr["saved_as"]);
 

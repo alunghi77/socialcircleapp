@@ -30,16 +30,18 @@
 	<div class="create-feed">
 		<div class="clearfix">
 		<div class="input">
+			
 			<?php echo Form::hidden('circle_id',0); ?>
 			<?php echo Form::hidden('media_url',0); ?>
 	  		<?php echo Form::input('discussion','', array('class' =>'xlarge', 'placeholder' => 'start a discussion...')); ?>
+	  		
 	  		<div class="input-toolbar">
 	  			<div class="media_film_strip">
-  				<a href="" class="nav_photo_sprite" id="scroller_left"></a>
-  				<div id="media_upload_preview">
-  					<!-- Load Upload Preview Content Here -->
-  				</div>
-  				<a href="" class="nav_photo_sprite" id="scroller_right"></a>
+	  				<a href="" class="nav_photo_sprite" id="scroller_left"></a>
+	  				<div id="media_upload_preview">
+	  					<!-- Load Upload Preview Content Here -->
+	  				</div>
+	  				<a href="" class="nav_photo_sprite" id="scroller_right"></a>
   				</div>	
 	  			<ul>
 	  				<li class="upload"><a href="#" id="upload_btn"></a></li>

@@ -32,6 +32,8 @@ create_comment = (e) ->
 
 			$( html ).insertBefore( $target )
 
+			$(e.target).val('')
+
 			
 	# Error
 	.fail () ->
@@ -61,6 +63,49 @@ create_user = () ->
 		res = JSON.parse xhr.responseText
 		# handle errors	
 		console.log res.head.description
+
+	false
+
+# ---------------------------
+# Update user
+# ---------------------------
+update_user = () ->
+
+	obj = {}
+	obj["username"] 	= $("#form_settings #form_username").val()
+	obj["fullname"] 	= $("#form_settings #form_fullname").val()
+	obj["email"] 		= $("#form_settings #form_email").val()
+	obj["media_data"] 	= JSON.parse $("#form_settings #form_media_url").attr("data-media")
+	obj["media_url"] 	= $("#form_settings #form_media_url").val()
+	obj["mobile"] 		= $("#form_settings #form_mobile").val()
+	obj["resources"] 	= $("#form_settings #form_resources").attr("data-resources")
+	obj["skills"] 		= $("#form_settings #form_skills").attr("data-skills")
+
+	id = $("#form_settings #form_id").val()
+
+	$(".alert").slideUp "fast", () ->
+
+		$(@).empty()
+
+	$.post "/api/users/#{id}", obj, (res,status)->
+
+		if res.head.success
+
+			$(".alert-success").fadeIn "fast"
+			$(".alert-success").animate { height:"40px"}, 500, () ->
+
+				$(@).append("<p>Great! Your settings have been updated successfully</p>")
+
+	.fail (xhr) ->
+	
+		res = JSON.parse xhr.responseText
+		# handle errors	
+		console.log res.head.description
+
+		$(".alert-error").fadeIn "fast"
+		$(".alert-error").animate { height:"40px"}, 500, () ->
+
+			$(@).append("<p>Ooops! User settings were not updated.</p>")
 
 	false
 
@@ -432,6 +477,9 @@ $ ->
 
 	# Create User
 	$("#action_signup").on "click", create_user
+
+	# Update User
+	$("#action_update_settings").on "click", update_user
 
 	# Create Circle
 	$("#action_create_circle").on "click", create_circle
