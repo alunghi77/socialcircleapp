@@ -174,19 +174,17 @@
     $(".feeds-container #form_circle_id").val("" + id);
     $(".create-feed").addClass("ajax-small");
     $(".feeds").fadeOut("slow", function() {});
-    $(".circle_container").slideUp("fast", function() {
-      return $(this).empty();
-    });
+    $(".circle_container").slideUp("fast", function() {});
     $.get("/api/feeds/" + id, function(res, status) {
       var html, template;
       if (res.head.success) {
+        $(".circle_container").empty();
         template = Handlebars.compile($("#circle-tmpl").html());
         html = $.trim(template({
           "circle": res.data
         }));
-        console.log(res.data);
         $(".circle_container").append(html);
-        $(".circle_container").slideDown("slow");
+        $(".circle_container").slideDown("fast");
         Handlebars.registerHelper("media", function(media) {
           var p, url;
           if (media) {

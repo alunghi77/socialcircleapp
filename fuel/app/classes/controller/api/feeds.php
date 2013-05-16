@@ -57,12 +57,23 @@ class Controller_Api_Feeds extends Controller_Api
 
 		// exit();
 
+		$profile_pic = '';
+
+		if (isset( $data['circlemedia']) and is_array($data['circlemedia'])){
+			foreach( $data['circlemedia'] as $media ){
+				if($media->type === 'profile'){
+					$profile_pic = '/files/circles/circle_'.$data['id'].'/'.$media->object['rounded'];
+					break;
+				}
+			}
+		}
+
 		$result = array( 
 			'id' 		=> $data['id'],
 			'name' 		=> $data['name'],
 			'meta'		=> $data['meta'],
 			'desc'		=> $data['desc'],
-			'profile_pic' => '/files/circles/circle_'.$data['id'].'/'.$data['circlemedia'][1]->object['rounded'],
+			'profile_pic' => $profile_pic,
 			'slug' 		=> 'none',
 			'members' 	=> array(),  # list of members of the circle
 			'feeds' 	=> array(),  # list of feed items
@@ -77,7 +88,13 @@ class Controller_Api_Feeds extends Controller_Api
 
 			foreach( $data->members as $item ){
 
-				$usermedia = Model_Usermedia::query()->where('user_id',$item->user->id)->get_one();
+				if($usermedia = Model_Usermedia::query()
+									->where('user_id',$item->user->id)
+									->get_one()){
+					$profile_pic = '/files/profiles/user_'.$item->user->id.'/'.$usermedia->object['rounded'];
+				} else {
+					$profile_pic ='';
+				}
 
 				$members_arr['data'][] = array(
 
@@ -85,7 +102,7 @@ class Controller_Api_Feeds extends Controller_Api
 						'id' 			=> $item->user->id,
 						'username' 		=> $item->user->username,
 						'fullname' 		=> Auth::get_profile_fields('fullname',$item->user->username ),
-						'profile_pic' 	=> '/files/profiles/user_'.$item->user->id.'/'.$usermedia->object['rounded'],
+						'profile_pic' 	=> $profile_pic,
 						'created_at' 	=> $item->user->created_at,
 					),
 				);

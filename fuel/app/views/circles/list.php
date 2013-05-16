@@ -11,7 +11,7 @@
 	<?php foreach($circles as $circle ):?>
 
 	<div class="circle">
-		<div class="image span2">
+		<div class="image">
 		<?php if( isset($circle->circlemedia) and count($circle->circlemedia) > 0 ): ?>
 		<?php foreach( $circle->circlemedia as $media ):?>
 			<?php if ( $media->type === 'profile') : ?>

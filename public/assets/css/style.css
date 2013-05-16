@@ -3,20 +3,26 @@
 body 			{ background-color: #f0f0f0; font-family: 'lucida grande';line-height: 14px;}
 
 /* App Nav */
-.nav 			{ margin: 20px 0px;}
-.nav a, .nav-pills > li > a 			{ background-color: #ef4423;margin:5px;border-radius: 30px;padding:15px;}
+.top-nav { background: url(https://a2.sndcdn.com/assets/images/header/header-bg-a0479b6e.png);
+height: 47px;position: fixed;
+z-index: 100;
+width: 100%;
+}
+.nav 			{ margin: 0px 0px;}
+.nav a, .nav-pills > li > a 			{ background-color: #ef4423;margin:5px;border-radius: 30px;padding:10px;}
 .nav a:hover, .nav .active a:hover 	{ background-color: #fff;}
 .nav .active a 	{ background-color: #c5c5c5; }
 
 /* App User Profile */
 
-#profile { text-align: right; position: relative;overflow: hidden;top:25px;}
-#profile .image img { width:44px;height:44px;float:left;margin-right: 5px; border-radius: 30px}
-#profile .content { float:left;width:165px;padding-top: 12px}
-#profile .content .title { }
+#profile { text-align: right; position: relative;overflow: hidden;top:5px;}
+#profile .image img { width:34px;height:34px;float:left;margin-right: 5px; border-radius: 30px}
+#profile .content { float:left;width:165px;padding-top: 2px; padding-right: 10px}
+#profile .content .title { color: #fff;
+font-weight: normal;}
 
 /* App Content */
-#content   	{ background-color: #fff;padding: 20px;position: relative;overflow: hidden;margin-bottom: 30px;}
+#content   	{ background-color: #fff;padding: 20px;position: relative;overflow: hidden;margin-bottom: 30px;margin-top: 70px}
 #content h2 { margin-bottom: 10px;border-bottom: 1px solid #ccc;padding-bottom: 5px; width: 80%;}
 #content h2 i { position: relative;top:7px;}
 #content .nav { margin-top: 0px; float:right;}
@@ -49,15 +55,19 @@ border: 0px;padding:10px 14px;font-size: 14px; margin-top: 20px;}
 
 .circle_page .circle  { width: 100%}
 
-.circle_scroller { width: 28px;height:46px;background-image:url(../img/sprite_nav.png);top:33px;z-index: 1000; display:block;}
-.prev { background-position: -28px 0px; position: absolute;left:7px;display: block;}
-.next { background-position: 0px 0px; position: absolute;left:900px;display: block }
+.circle_scroller { width: 28px;height:46px;background-image:url(../img/sprite_nav.png);top:26px;z-index: 1000; display:block;}
+.prev { background-position: -28px 0px; position: absolute;left:7px;display: none;}
+.next { background-position: 0px 0px; position: absolute;left:900px;display: none; }
 
-.circles_container { width: 100%;border-bottom: 1px solid #eee;padding-bottom: 10px;}
+.circles_container { width: 100%;position: relative;
+left: -28px;overflow: hidden;
+
+top: -20px;
+background: #eee;padding-bottom: 10px;width:980px;}
 .circles { width: 2000px;}
 .circles 				{ position: relative;overflow: hidden;}
 .circle 				{ float: left;margin-bottom: 10px; margin-right: 10px; width:65px;}
-.circle .image 			{ border-radius: 30px;width:60px;height:60px;background-color:#edeff4; }
+.circle .image 			{ border-radius: 30px;width:60px;height:60px;background-color:#edeff4; float: left;box-shadow: 1px 2px 3px #666;}
 .circle .image img{ border-radius: 30px}
 
 .circle .content 		{ width:900px;}
@@ -71,10 +81,14 @@ border: 0px;padding:10px 14px;font-size: 14px; margin-top: 20px;}
 .circle_page .members_container { padding:5px 0px}
 .circle_page .members { position:relative; top:3px; background-color:#edeff4;padding:6px 16px 6px 6px;margin-right: 2px;width:auto;display: inline; color: #333; border: 1px solid #b1c0e5;}
 
-.circle_container { padding: 10px; background-color: #DE4D5A; position: relative;overflow: hidden;}
+.circle_container { padding: 10px; background-color: #DE4D5A; position: relative;overflow: hidden;display: none;left: -20px;
+width: 980px;
+top: -20px;}
+.circle_container .edit_circle { color:#fff;font-size: 12px; text-transform: lowercase;}
+.circle_container .edit_circle i { position: relative;top:1px;}
 .circle_container .image { width: 100px;float:left;}
 .circle_container .image img { border-radius: 40px}
-.circle_container .content { width: 700px;float:left;}
+.circle_container .content { width: 780px;float:left;}
 .circle_container .content h4 { color: #fff;margin-bottom: 10px; text-transform: uppercase;font-weight: normal; font-size: 18px}
 .circle_container .content .members { position: relative;overflow: hidden;width: 100%;}
 .circle_container .content .members .member { float: left;height: 50px; width: auto;opacity: 1; background-color: #ea616e;margin:0px 3px 3px 0px;}
@@ -84,7 +98,7 @@ border: 0px;padding:10px 14px;font-size: 14px; margin-top: 20px;}
 .circle_container .content .members .member .content h6 { color: #fff;font-weight: normal; font-size: 12px}
 /* App Feeds */
 
-.feeds-container { width:451px;position: relative;overflow: hidden;float: left}
+.feeds-container { width:452px;position: relative;overflow: hidden;float: left}
 
 /* App Feeds - Create */
 
@@ -94,11 +108,14 @@ border: 0px;padding:10px 14px;font-size: 14px; margin-top: 20px;}
 .input-toolbar ul li          { float: left;width:15px;height:15px;border-right: 1px solid #e0e0e0;padding:10px;}
 .input-toolbar ul li a        { display: block; width:100%;height: 100%;padding:5px;}
 .input-toolbar ul li.upload   { background: transparent url('../img/icons/icon-upload.png') no-repeat center center;}
+.input-toolbar ul li.meeting  { background: transparent url('../img/icons/icon-meeting.png') no-repeat center center;}
+.input-toolbar ul li.venue    { background: transparent url('../img/icons/icon-venue.png') no-repeat center center;}
+.input-toolbar ul li.person   { background: transparent url('../img/icons/icon-add-person.png') no-repeat center center;}
 .input-toolbar ul li.post     { background-color: #0074cc;float:right;}
 .input-toolbar ul li.post a   { color: #fff;text-shadow:none;padding:0px; position: relative;left: -5px}
 .input-toolbar ul li.label    { width:150px;background-color: transparent;color: #333;text-shadow:none;top:0px; position: relative;border:0px;}
 
-.feeds 	{ position: relative;overflow: hidden; border-left: 1px solid #e9e9e9; }
+.feeds 	{ position: relative;overflow: hidden; border-left: 1px solid #e9e9e9;border-right: 1px solid #e9e9e9 }
 .feeds a { color: #3b5998;}
 .feed 	{ padding:10px;position: relative;overflow: hidden; float: left; border-top: 1px solid #e9e9e9;}
 .feed .image 		{ float: left}

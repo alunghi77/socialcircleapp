@@ -23,15 +23,23 @@ class Controller_Circles extends Controller_Template
 
 	public function action_index()
 	{
-		$data["subnav"] 	= array('groups'=> 'active' );
-		$data["groupnav"] 	= array('index'=> 'active' );
+		$data['subnav']   	= array('groups'=> 'active' );
+		$data['groupnav'] 	= array('list'=> 'active' );
 
 		View::set_global('pageclass', 'circle_page');
+
+		$data['circles']  = Model_Circle::query()
+								->related('members')
+								->related('members.user')
+								->related('circlemedia')
+								->order_by('created_at', 'desc')
+								->get();
+
 		
-		$view 				= View::forge('layout');
-		$view->title 		= 'Group';
-		$view->nav 			= View::forge('nav', $data);
-		$view->content 		= View::forge('circles/index', $data);
+		$view = View::forge('layout');
+		$view->title 	= 'List';
+		$view->nav 		= View::forge('nav', $data);
+		$view->content 	= View::forge('circles/list', $data);
 
 		return $view;
 	}
@@ -102,6 +110,7 @@ class Controller_Circles extends Controller_Template
 								->related('members')
 								->related('members.user')
 								->related('circlemedia')
+								->order_by('created_at', 'desc')
 								->get();
 
 		

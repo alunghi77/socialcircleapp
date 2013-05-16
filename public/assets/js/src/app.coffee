@@ -215,19 +215,17 @@ switch_circle = () ->
 
 	$(".create-feed").addClass("ajax-small")
 
-
-
 	# Fecth Feeds
 
 	$(".feeds").fadeOut "slow", ()->
 	
 	$(".circle_container").slideUp "fast", ()->
 
-		$(@).empty()
-
 	$.get "/api/feeds/#{id}", (res,status)->
 
 		if res.head.success	
+
+			$(".circle_container").empty()
 
 			# ---------------------------
 			# Render tmpl
@@ -236,10 +234,8 @@ switch_circle = () ->
 			template 	= Handlebars.compile $("#circle-tmpl").html()
 			html 	 	= $.trim template {"circle":res.data }	
 
-			console.log res.data
-
 			$(".circle_container").append( html );	
-			$(".circle_container").slideDown "slow"
+			$(".circle_container").slideDown "fast"
 
 			# ---------------------------
 			# Display Media

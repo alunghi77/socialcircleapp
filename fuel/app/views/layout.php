@@ -34,22 +34,26 @@
 	
 </head>
 <body class="<?php echo $pageclass;?>">
-	<div class="container">
-		<div class="row">
-			<div class="span9">
-				<?php echo $nav; ?>
-			</div>
-			<?php if(Auth::check()):?>
-			<div id="profile" class="span3">
-				<div class="image">
-	  				<img src="<?php echo $media_url;?>" />
+	<div class="top-nav">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<?php echo $nav; ?>
 				</div>
-				<div class="content">
-					<p class="title">Welcome, <strong><?php echo $current_user_fullname;?></strong>! <a href="/logout">Logout</a></p>
+				<?php if(Auth::check()):?>
+				<div id="profile" class="span3">
+					<div class="content">
+						<p class="title">Welcome, <?php echo $current_user_fullname;?> <a href="/logout">Logout</a></p>
+					</div>
+					<div class="image">
+		  				<img src="<?php echo $media_url;?>" />
+					</div>
 				</div>
+				<?php endif; ?>
 			</div>
-			<?php endif; ?>
 		</div>
+	</div>
+	<div class="container">
 		<div class="row">
 			<div class="span12">
 				<div id="content"> 

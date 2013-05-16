@@ -4,7 +4,13 @@
 
 	<?php if(isset($circles) and is_array($circles)):?>
 
-	<div class="circles">
+	<div class="circle">
+		<div class="image span2">
+			<a href="/circles/create" >
+			<?php echo Asset::img('icons/icon-circle.png');?>
+			</a>
+		</div>
+	</div>
 
 	<?php foreach($circles as $circle ):?>
 
@@ -25,7 +31,6 @@
 
 	<?php endforeach; ?>
 
-	</div>
 
 	<?php else : ?>
 
@@ -76,6 +81,23 @@
 		<div class="clearfix">
 			<div class="input">
 	  			<?php echo Form::input('status','', array('class' =>'xlarge', 'placeholder' => 'add a todo list...')); ?>
+	  			<?php echo Form::hidden('media_url',0); ?>
+	  			<div class="input-toolbar">
+		  			<div class="media_film_strip">
+		  				<a href="" class="nav_photo_sprite" id="scroller_left"></a>
+		  				<div id="media_upload_preview">
+		  					<!-- Load Upload Preview Content Here -->
+		  				</div>
+		  				<a href="" class="nav_photo_sprite" id="scroller_right"></a>
+	  				</div>	
+		  			<ul>
+		  				<li class="upload"><a href="#" id="upload_btn"></a></li>
+		  				<li class="meeting"><a href="#" i></a></li>
+		  				<li class="venue"><a href="#" ></a></li>
+		  				<li class="person"><a href="#"></a></li>
+		  				<li class="post"><a href="#" id="action_submit_feed">Add</a></li>
+		  			</ul>
+		  		</div>
 			</div>	
 		</div><!-- /clearfix -->
 	</div>
@@ -174,7 +196,7 @@
 		<img src="{{circle.profile_pic}}" />
 	</div>
 	<div class="content">
-		<h4>{{circle.name}}</h4>
+		<h4>{{circle.name}} <span class="pull-right"><a href="/circles/edit/{{circle.id}}" class="edit_circle"><i class="icon-edit icon-white"></i> edit</a></span></h4>
 		<p>{{circle.desc}}</p>
 		<div class="members">
 			{{#each circle.members.data}}

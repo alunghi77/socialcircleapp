@@ -71,9 +71,9 @@ class Controller_Api_Media extends Controller_Api
 
 			    $FFmpeg = new FFmpeg( Config::get('FFMPEG_PATH') );
 			    $FFmpeg
-		    		->input( DOCROOT . 'files' . DS . 'posts' . DS . $file['basename'] )
+		    		->input( DOCROOT . 'files' . DS . 'feeds' . DS . $file['basename'] )
 		    		->thumb( $size , $start, $frames )
-					->output( DOCROOT . 'files' . DS . 'posts' . DS . $unique_id . '.jpg' )
+					->output( DOCROOT . 'files' . DS . 'feeds' . DS . $unique_id . '.jpg' )
 		    		->ready();
 
 	    		$data = array(
@@ -82,7 +82,7 @@ class Controller_Api_Media extends Controller_Api
 
     					'type' 			=> 'video',
     					'site_name'		=> 'local_video',
-						'image_src' 	=> DS . 'files' . DS . 'posts' . DS . $unique_id . '.jpg',
+						'image_src' 	=> DS . 'files' . DS . 'feeds' . DS . $unique_id . '.jpg',
 						'video_link' 	=> $url,
 						'url'			=> $url,
 

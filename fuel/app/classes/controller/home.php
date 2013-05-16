@@ -86,7 +86,9 @@ class Controller_Home extends Controller_Template
 		
 		View::set_global('pageclass', 'feed_page');
 
-		$data['circles']  	= Model_Circle::query()->get();
+		$data['circles']  	= Model_Circle::query()
+								->order_by('created_at','desc')
+								->get();
 
 		$view = View::forge('layout');
 		$view->title 	= 'Feed';

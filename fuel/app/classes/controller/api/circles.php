@@ -49,8 +49,6 @@ class Controller_Api_Circles extends Controller_Api
 
 		# - prepare response
 
-		circle
-
 		# - send response
 		return parent::success('Created.', 201, array('data' => Format::forge( $circles )->to_array() ));
 
