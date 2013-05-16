@@ -22,7 +22,7 @@ width: 100%;
 font-weight: normal;}
 
 /* App Content */
-#content   	{ background-color: #fff;padding: 20px;position: relative;overflow: hidden;margin-bottom: 30px;margin-top: 70px}
+#content   	{ background-color: #fff;padding: 20px;position: relative;overflow: hidden;margin-bottom: 30px;margin-top: 50px}
 #content h2 { margin-bottom: 10px;border-bottom: 1px solid #ccc;padding-bottom: 5px; width: 80%;}
 #content h2 i { position: relative;top:7px;}
 #content .nav { margin-top: 0px; float:right;}
@@ -68,7 +68,7 @@ top: -20px;
 background: #eee;padding-bottom: 10px;width:980px;}
 .circles { width: 2000px;}
 .circles 				{ position: relative;overflow: hidden;}
-.circle 				{ float: left;margin-bottom: 10px; margin-right: 5px; width:65px;margin-left: 10px;margin-top: 15px;}
+.circle 				{ float: left;margin-bottom: 10px; margin-right: 0px; width:65px;margin-left: 10px;margin-top: 15px;}
 .circle .image 			{ border-radius: 30px;width:60px;height:60px;background-color:#edeff4; float: left;box-shadow: 1px 0px 22px #bbb;}
 .circle .image img{ border-radius: 30px}
 
@@ -83,24 +83,41 @@ background: #eee;padding-bottom: 10px;width:980px;}
 .circle_page .members_container { padding:5px 0px}
 .circle_page .members { position:relative; top:3px; background-color:#C0392B;padding:6px 16px 6px 6px;margin-right: 2px;width:auto;display: inline; color: #333; border: 1px solid #b1c0e5;}
 
-.circle_container {  background-color: #E74C3C; position: relative;overflow: hidden;display: none;left: -20px;
+.circle_container {  left: -20px;
 width: 980px;
-top: -20px;border:1px solid #eee;}
-.circle_container .edit_circle { color:#fff;font-size: 12px; text-transform: lowercase;}
+top: -20px;
+border: 1px solid #eee;
+background: url(http://www.yabasta.it/local/cache-gd2/dfe50638c41ef24b3f89e92983a8fa7f.jpg) no-repeat;
+background-size: 96%;
+height: 350px;position: relative;}
+.circle_container .edit_circle { color:#fff;font-size: 12px; text-transform: lowercase;position: relative;top: -10px;}
 .circle_container .edit_circle i { position: relative;top:1px;}
 .circle_container .image { width: 80px;float:left;}
 .circle_container .image img { border-radius: 40px}
-.circle_container .content { width: 810px;float:left;padding: 10px;}
-.circle_container .content h4 { color: #fff;margin-bottom: 10px; text-transform: uppercase;font-weight: normal; font-size: 18px}
-.circle_container .content .members { position: relative;overflow: hidden;width: 100%;}
+.circle_container .content { height: 287px;width: 810px;float:left;padding: 20px 10px;}
+.circle_container .content p { font-weight: bold;padding-left: 2px}
+.circle_container .content h4 { 
+color: #F1C40F;
+margin-bottom: 10px;
+text-transform: uppercase;
+font-weight: normal;
+font-size: 30px;
+text-shadow: 1px 1px 2px #000}
+.circle_container .content .members { }
 .circle_container .content .members .member { float: left;height: 50px; width: auto;opacity: 1; background-color: #ea616e;margin:0px 3px 3px 0px;}
 .circle_container .content .members .member .image { width: 50px;}
 .circle_container .content .members .member .image img { border-radius: 0px}
 .circle_container .content .members .member .content { width:auto;padding: 4px 15px 4px 4px;}
 .circle_container .content .members .member .content h6 { color: #fff;font-weight: normal; font-size: 12px}
-.circle_container .circle-menu { float: left; background-color: #ECF0F1; width:940px;height:auto;border:0px solid #ddd;border-top:0px;}
+.circle_container .circle-menu { float: left;
+background-color: #fff;
+width: 940px;
+height: auto;
+border: 0px solid #ddd;
+border-top: 0px;
+box-shadow: 7px -6px 11px #000}
 .circle_container .circle-menu ul{margin:0px;padding:0px;list-style-type: none}
-.circle_container .circle-menu ul li { float: left;border-right:0px solid #fff;}
+.circle_container .circle-menu ul li { float: left;border-right:1px solid #eee;}
 .circle_container .circle-menu ul li a { display: block; width:auto;color:#34495E;font-size: 13px;font-weight: bold;height: 43px;
 line-height: 3.3;
 padding: 0 17px;}
@@ -142,7 +159,7 @@ padding: 0 17px;}
 
 .feed .feed-message { padding: 0px;float:left;}
 .feed .feed-message p { padding:10px 0px;}
-.feed-comment { position: relative;overflow: hidden;margin-bottom: 10px; background-color: #ECF0F1;margin-bottom: 2px;padding: 4px }
+.feed-comment { position: relative;overflow: hidden;margin-bottom: 10px; background-color: #fafbfb;margin-bottom: 2px;padding: 4px; }
 .feed-comment .content p { font-size:12px;margin-bottom: 2px}
 .feed-comment ul.meta { list-style-type: none; margin:0px;padding:0px;}
 .feed-comment ul.meta li { float:left;font-size: 11px; color: #c3c3c3;}

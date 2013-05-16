@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
 	<?php echo Asset::css(array(
+		'//fonts.googleapis.com/css?family=Open+Sans',
 		'bootstrap.css',
 		'style.css',
 

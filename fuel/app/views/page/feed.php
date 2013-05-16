@@ -197,7 +197,7 @@
 	</div>
 	<div class="content">
 		<h4>{{circle.name}} <span class="pull-right"><a href="/circles/edit/{{circle.id}}" class="edit_circle"><i class="icon-edit icon-white"></i> edit</a></span></h4>
-		<p>{{circle.desc}}</p>
+		<p>{{circle.desc}}</p><!--
 		<div class="members">
 			{{#each circle.members.data}}
 			<div class="member">
@@ -209,7 +209,7 @@
 				</div>
 			</div>
 			{{/each}}
-		</div>
+		</div> -->
 	</div>
 	<div class="circle-menu">
 		<ul>
