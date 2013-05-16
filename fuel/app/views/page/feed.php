@@ -5,7 +5,7 @@
 	<?php if(isset($circles) and is_array($circles)):?>
 
 	<div class="circle">
-		<div class="image span2">
+		<div class="image">
 			<a href="/circles/create" >
 			<?php echo Asset::img('icons/icon-circle.png');?>
 			</a>
@@ -15,7 +15,7 @@
 	<?php foreach($circles as $circle ):?>
 
 	<div class="circle">
-		<div class="image span2">
+		<div class="image">
 			<a href="#" role="button" data-id="<?php echo $circle->id;?>" class="popover-test circle-tooltip switch_circle" data-toggle="popover" data-original-title="A Title" data-content="<?php echo $circle->name;?>">
 		<?php if( isset($circle->circlemedia) and count($circle->circlemedia) > 0 ): ?>
 			<?php foreach( $circle->circlemedia as $media ):?>
@@ -192,7 +192,7 @@
 <!-- Circle Expand TMPL -->
 <script id="circle-tmpl" type="text/x-handlebars-template">
 	
-	<div class="image">
+	<div class="image circle-profile">
 		<img src="{{circle.profile_pic}}" />
 	</div>
 	<div class="content">
@@ -211,6 +211,14 @@
 			{{/each}}
 		</div>
 	</div>
-	
+	<div class="circle-menu">
+		<ul>
+			<li class="switch_circle"><a href="" data-id="{{circle.id}}">Feed</a></li>
+			<li><a href="">About</a></li>
+			<li><a href="">Events</a></li>
+			<li><a href="">Resources</a></li>
+			<li><a href="">Members</a></li>
+		</ul>
+	</div>
 </script>
 

@@ -6,7 +6,7 @@
 	<li class='<?php echo Arr::get($groupnav, "invite" ); ?>'><?php echo Html::anchor('/circles/invite','<i class="icon-flag"></i>');?></li>
 </ul>
 
-<div class="create_group panel">
+<div class="create_group">
 	<h2>Edit Circle</h2>
 	<div class="alert alert-success"></div>
 	<div class="alert alert-error"></div>

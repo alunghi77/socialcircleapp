@@ -1,5 +1,5 @@
 
-<fieldset id="create_circle">
+<fieldset id="create_circle" class="field-panel">
 	<div class="clearfix">
 		<div class="input">
 	  		<?php echo Form::input('name',$circle->name, array('class' =>'xlarge', 'placeholder' => 'Name')); ?>
@@ -10,25 +10,7 @@
 	  		<?php echo Form::input('desc',$circle->desc, array('class' =>'xlarge', 'placeholder' => 'Enter description of the group')); ?>
 		</div>	
 	</div><!-- /clearfix -->
-	<div class="clearfix">
-		<div class="input">
-	  		<?php echo Form::hidden('members','', array('class' =>'xlarge','placeholder' => 'Members')); ?>
-	  		<div class="members_container">
-	  		<?php if( isset($circle->members) and count($circle->members) > 0 ): ?>
-	  			<?php foreach( $circle->members as $members ):?>
-	  				<div class="members">
-	  					<?php echo Auth::get_profile_fields('fullname',$members->user->username );?>
-	  				</div>
-		  		<?php endforeach; ?>
-		  	<?php endif;?>
-		  </div>	
-		</div>	
-	</div><!-- /clearfix -->
-	<div class="clearfix">
-		<div class="input">
-	  		<?php echo Form::input('invites','', array('class' =>'xlarge','placeholder' => 'Invite friends')); ?>
-		</div>	
-	</div><!-- /clearfix -->
+	
 	<div class="clearfix">
 		<div class="input">
 	  		<div class="input-toolbar">
@@ -66,4 +48,32 @@
 			<?php echo Form::submit('submit', 'Update circle', array( 'class' => 'btn btn-primary','id' => 'action_update_circle')); ?>
 		</div>	
 	</div><!-- /clearfix -->
+
+</fieldset>
+
+<fieldset id="create_circle" class="field-panel">
+	
+	<div class="clearfix">
+		<div class="input">
+	  		<?php echo Form::input('invites','', array('class' =>'xlarge','placeholder' => 'Invite friends')); ?>
+		</div>	
+	</div><!-- /clearfix -->
+
+	<div class="clearfix">
+		<div class="input">
+	  		<?php echo Form::hidden('members','', array('class' =>'xlarge','placeholder' => 'Members')); ?>
+	  		<div class="members_container">
+	  		<?php if( isset($circle->members) and count($circle->members) > 0 ): ?>
+	  			<?php foreach( $circle->members as $members ):?>
+	  				<div class="members">
+	  					<?php echo Auth::get_profile_fields('fullname',$members->user->username );?>
+	  				</div>
+		  		<?php endforeach; ?>
+		  	<?php endif;?>
+		  </div>	
+		</div>	
+	</div><!-- /clearfix -->
+	
+	
+	
 </fieldset>

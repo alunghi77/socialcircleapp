@@ -1,9 +1,9 @@
 /* App Styles */
 
 body 			{ background-color: #f0f0f0; font-family: 'lucida grande';line-height: 14px;}
-
+.feed-comment .content p { font-family: 'lucida grande';}
 /* App Nav */
-.top-nav { background: url(https://a2.sndcdn.com/assets/images/header/header-bg-a0479b6e.png);
+.top-nav { background: #2C3E50 ;
 height: 47px;position: fixed;
 z-index: 100;
 width: 100%;
@@ -11,7 +11,7 @@ width: 100%;
 .nav 			{ margin: 0px 0px;}
 .nav a, .nav-pills > li > a 			{ background-color: #ef4423;margin:5px;border-radius: 30px;padding:10px;}
 .nav a:hover, .nav .active a:hover 	{ background-color: #fff;}
-.nav .active a 	{ background-color: #c5c5c5; }
+.nav .active a 	{ background-color: #c5c5c5; box-shadow:inset 0px 1px 10px #666}
 
 /* App User Profile */
 
@@ -53,6 +53,8 @@ border: 0px;padding:10px 14px;font-size: 14px; margin-top: 20px;}
 .circle_page #create_circle { }
 #create_circle .input{ padding:5px 0px; }
 
+.field-panel { width:50%;float:left;}
+
 .circle_page .circle  { width: 100%}
 
 .circle_scroller { width: 28px;height:46px;background-image:url(../img/sprite_nav.png);top:26px;z-index: 1000; display:block;}
@@ -60,14 +62,14 @@ border: 0px;padding:10px 14px;font-size: 14px; margin-top: 20px;}
 .next { background-position: 0px 0px; position: absolute;left:900px;display: none; }
 
 .circles_container { width: 100%;position: relative;
-left: -28px;overflow: hidden;
+left: -20px;overflow: hidden;
 
 top: -20px;
 background: #eee;padding-bottom: 10px;width:980px;}
 .circles { width: 2000px;}
 .circles 				{ position: relative;overflow: hidden;}
-.circle 				{ float: left;margin-bottom: 10px; margin-right: 10px; width:65px;}
-.circle .image 			{ border-radius: 30px;width:60px;height:60px;background-color:#edeff4; float: left;box-shadow: 1px 2px 3px #666;}
+.circle 				{ float: left;margin-bottom: 10px; margin-right: 5px; width:65px;margin-left: 10px;margin-top: 15px;}
+.circle .image 			{ border-radius: 30px;width:60px;height:60px;background-color:#edeff4; float: left;box-shadow: 1px 0px 22px #bbb;}
 .circle .image img{ border-radius: 30px}
 
 .circle .content 		{ width:900px;}
@@ -79,16 +81,16 @@ background: #eee;padding-bottom: 10px;width:980px;}
 .circle-tooltip { display: block; width: 100%; height: 100%}
 
 .circle_page .members_container { padding:5px 0px}
-.circle_page .members { position:relative; top:3px; background-color:#edeff4;padding:6px 16px 6px 6px;margin-right: 2px;width:auto;display: inline; color: #333; border: 1px solid #b1c0e5;}
+.circle_page .members { position:relative; top:3px; background-color:#C0392B;padding:6px 16px 6px 6px;margin-right: 2px;width:auto;display: inline; color: #333; border: 1px solid #b1c0e5;}
 
-.circle_container { padding: 10px; background-color: #DE4D5A; position: relative;overflow: hidden;display: none;left: -20px;
+.circle_container {  background-color: #E74C3C; position: relative;overflow: hidden;display: none;left: -20px;
 width: 980px;
-top: -20px;}
+top: -20px;border:1px solid #eee;}
 .circle_container .edit_circle { color:#fff;font-size: 12px; text-transform: lowercase;}
 .circle_container .edit_circle i { position: relative;top:1px;}
-.circle_container .image { width: 100px;float:left;}
+.circle_container .image { width: 80px;float:left;}
 .circle_container .image img { border-radius: 40px}
-.circle_container .content { width: 780px;float:left;}
+.circle_container .content { width: 810px;float:left;padding: 10px;}
 .circle_container .content h4 { color: #fff;margin-bottom: 10px; text-transform: uppercase;font-weight: normal; font-size: 18px}
 .circle_container .content .members { position: relative;overflow: hidden;width: 100%;}
 .circle_container .content .members .member { float: left;height: 50px; width: auto;opacity: 1; background-color: #ea616e;margin:0px 3px 3px 0px;}
@@ -96,6 +98,15 @@ top: -20px;}
 .circle_container .content .members .member .image img { border-radius: 0px}
 .circle_container .content .members .member .content { width:auto;padding: 4px 15px 4px 4px;}
 .circle_container .content .members .member .content h6 { color: #fff;font-weight: normal; font-size: 12px}
+.circle_container .circle-menu { float: left; background-color: #ECF0F1; width:940px;height:auto;border:0px solid #ddd;border-top:0px;}
+.circle_container .circle-menu ul{margin:0px;padding:0px;list-style-type: none}
+.circle_container .circle-menu ul li { float: left;border-right:0px solid #fff;}
+.circle_container .circle-menu ul li a { display: block; width:auto;color:#34495E;font-size: 13px;font-weight: bold;height: 43px;
+line-height: 3.3;
+padding: 0 17px;}
+.circle_container .circle-menu ul li a:hover { text-decoration: none;}
+
+.circle-profile { padding: 10px}
 /* App Feeds */
 
 .feeds-container { width:452px;position: relative;overflow: hidden;float: left}
@@ -131,7 +142,7 @@ top: -20px;}
 
 .feed .feed-message { padding: 0px;float:left;}
 .feed .feed-message p { padding:10px 0px;}
-.feed-comment { position: relative;overflow: hidden;margin-bottom: 10px; background-color: #edeff4;margin-bottom: 2px;padding: 4px }
+.feed-comment { position: relative;overflow: hidden;margin-bottom: 10px; background-color: #ECF0F1;margin-bottom: 2px;padding: 4px }
 .feed-comment .content p { font-size:12px;margin-bottom: 2px}
 .feed-comment ul.meta { list-style-type: none; margin:0px;padding:0px;}
 .feed-comment ul.meta li { float:left;font-size: 11px; color: #c3c3c3;}
