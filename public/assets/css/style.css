@@ -1,23 +1,65 @@
 /* App Styles */
 
-body 			{ background-color: #f0f0f0; font-family: 'lucida grande';line-height: 14px;}
-.feed-comment .content p { font-family: 'lucida grande';}
-/* App Nav */
-.top-nav { background: #2C3E50 ;
-height: 47px;position: fixed;
-z-index: 100;
-width: 100%;
+body 			{ 
+
+	background-color: #f0f0f0; 
+	font-family: 'lucida grande';
+	line-height: 14px;
+
 }
 
-body.start_page { background: url(../img/bg-start.jpg ) no-repeat; background-size: 80%;}
+body, .feed-comment .content p {
 
-body.start_page #content { position: absolute;right:0px;width:350px;top:-50px;height: 100%; background-color: #34495E}
-body.start_page #content h2 { border-bottom: 0px; color:#fff;font-weight: normal}
+	font-family: 'lucida grande';
+
+}
+
+/* App Nav */
+
+.top-nav 		{ background: #2C3E50 ;height: 47px;position: fixed;z-index: 100;width: 100%;}
+
+body.start_page { background: #eee no-repeat; background-size: 80%;}
+
+body.start_page #content 		{ position: absolute;right:0px;width:350px;top:-50px;background-color: #34495E;height: 700px;}
+body.start_page #content h2 	{ border-bottom: 0px; color:#fff;font-weight: normal}
 body.start_page #content .panel { width:100%;position: relative;overflow: hidden;top: 100px;}
-body.start_page #content #form_username, body.start_page #content #form_password { border: 0px solid #cccccc;
-padding: 8px;
-width: 320px;
-font-size: 14px;}
+
+body.start_page #content #form_username, 
+body.start_page #content #form_password { 
+
+	border: 0px solid #cccccc;
+	padding: 8px;
+	width: 320px;
+	font-size: 14px;
+
+}
+
+.bgstretcher-area { 
+	text-align: left; 
+}
+
+.bgstretcher, .bgstretcher UL, .bgstretcher UL LI {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.bgstretcher UL, .bgstretcher UL LI {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bgstretcher {
+	background: black;
+	overflow: hidden;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	_position: absolute; /*IE6 doesn't support fixed positioning*/
+	top: 0;
+	left: 0;
+}
 
 .nav 			{ margin: 0px 0px;}
 .nav a, .nav-pills > li > a 			{ background-color: #ef4423;margin:5px;border-radius: 30px;padding:10px;}

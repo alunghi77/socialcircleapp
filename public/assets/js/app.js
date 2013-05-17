@@ -402,6 +402,20 @@
   };
 
   $(function() {
+    $('body.start_page').bgStretcher({
+      images: ['/assets/img/bg-start.jpg'],
+      imageWidth: 1024,
+      imageHeight: 768,
+      slideDirection: 'N',
+      slideShowSpeed: 1000,
+      transitionEffect: 'fade',
+      sequenceMode: 'normal',
+      buttonPrev: '#prev',
+      buttonNext: '#next',
+      pagination: '#nav',
+      anchoring: 'left center',
+      anchoringImg: 'left center'
+    });
     $(".switch_circle").on("click", switch_circle);
     $(".circle-tooltop").popover();
     $("#action_signup").on("click", create_user);
