@@ -132,7 +132,7 @@ box-shadow: 7px -6px 11px #000}
 .circle_container .circle-menu ul li a { display: block; width:auto;color:#34495E;font-size: 13px;font-weight: bold;height: 43px;
 line-height: 3.3;
 padding: 0 17px;}
-.circle_container .circle-menu ul li a:hover { text-decoration: none;}
+.circle_container .circle-menu ul li a:hover { text-decoration: none;background-color: #eee}
 
 .circle-profile { padding: 10px}
 /* App Feeds */
