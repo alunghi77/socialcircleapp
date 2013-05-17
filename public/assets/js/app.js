@@ -312,7 +312,7 @@
     obj["password"] = $("#login_user #form_password").val();
     $.post("/api/users/auth", obj, function(res, status) {
       if (res.head.success) {
-        return window.location.href = '/';
+        return window.location.href = '/feed';
       }
     }).fail(function(xhr) {
       var res;

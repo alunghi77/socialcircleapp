@@ -432,7 +432,7 @@ auth_user = () ->
 
 		if res.head.success
 
-			window.location.href = '/';
+			window.location.href = '/feed';
 
 			
 	.fail (xhr) ->

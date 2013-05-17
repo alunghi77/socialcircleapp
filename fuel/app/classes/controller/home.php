@@ -25,12 +25,27 @@ class Controller_Home extends Controller_Template
 	{
 		$data["subnav"] 	= array('home'=> 'active' );
 
-		View::set_global('pageclass', 'home_page');
+		
 
-		$view = View::forge('layout');
-		$view->title 	= 'Home';
-		$view->nav 		= View::forge('nav', $data);
-		$view->content 	= View::forge('page/index', $data);
+		if( Auth::check() ){
+
+			View::set_global('pageclass', 'home_page');
+
+			$view = View::forge('layout');
+			$view->title 	= 'Home';
+			$view->nav 		= View::forge('nav', $data);
+			$view->content 	= View::forge('page/index', $data);
+
+		} else {
+
+			View::set_global('pageclass', 'start_page');
+
+			$view = View::forge('layout_login');
+			$view->title 	= 'Home';
+			$view->nav 		= View::forge('nav', $data);
+			$view->content 	= View::forge('page/index', $data);
+
+		}
 
 		return $view;
 	}
